@@ -1,4 +1,6 @@
 python-dotenv
+# before getting Pillow, you need these package
+# sudo apt-get update && sudo apt install libjpeg-dev zlib1g-dev libfreetype6-dev liblcms2-dev libopenjp2-7-dev libtiff-dev tcl8.6-dev tk8.6-dev python3-tk
 Pillow
 requests
 bs4
