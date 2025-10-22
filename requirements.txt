@@ -1,5 +1,5 @@
 python-dotenv
 Pillow
-aiohttp
+requests
 google-maps-routing
 bs4
