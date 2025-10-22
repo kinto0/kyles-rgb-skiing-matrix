@@ -11,7 +11,7 @@ async def main():
         print(f"Resort: {resort.__class__.__name__}")
         print(f"Lift Open Percentage: {resort.lift_open_percent()}")
         print(f"Minutes to Drive: {resort.get_minutes_to_drive()}")
-        print(f"Recent Snowfall: {resort.get_recent_snowfall()")
+        print(f"Recent Snowfall: {resort.get_recent_snowfall()}")
         print("-" * 40)
 
 if __name__ == "__main__":
