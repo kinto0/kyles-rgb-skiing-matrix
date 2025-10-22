@@ -3,3 +3,4 @@ Pillow
 requests
 google-maps-routing
 bs4
+httpx

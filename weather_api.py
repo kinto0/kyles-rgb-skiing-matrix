@@ -37,7 +37,7 @@ async def get_weather() -> Weather:
     async with httpx.AsyncClient() as client:
         try:
             app_id = os.getenv("WEATHER_KEY")
-            lat, lon = 40.77, -73.96
+            lat, lon = os.getenv("START_LATITUDE"), os.getenv("START_LONGITUDE")
             r = await client.get(f'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude=minutely,hourly,alerts&appid={app_id}&units=imperial')
             content = json.loads(r.content)
 
