@@ -29,7 +29,7 @@ class ABasin(Resort):
         except Exception as e:
             return f"Error fetching lift data: {e}"
 
-    async def get_minutes_to_drive(self) -> str:
+    def get_minutes_to_drive(self) -> str:
         destination_lat = 39.63424085075325  # coordinates for Arapahoe Basin, CO
         destination_lng = -105.87140342042032
         try:

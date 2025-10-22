@@ -43,7 +43,7 @@ class Keystone(Resort):
         except Exception as e:
             return f"Error fetching lift data: {e}"
 
-    async def get_minutes_to_drive(self) -> str:
+    def get_minute_to_drive(self) -> str:
         destination_lat = 39.60895859258185  # River Run Lot, Keystone Resort, CO
         destination_lng = -105.9438314730835
         try:

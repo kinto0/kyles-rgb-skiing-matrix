@@ -1,3 +1,4 @@
+from lib.resorts.resort import Resort
 import asyncio
 from lib.resorts.breck import Breck
 from lib.resorts import Copper, ABasin, Keystone
@@ -5,7 +6,7 @@ from lib.resorts import Copper, ABasin, Keystone
 async def main():
     resorts = [Breck(), Copper(), ABasin(), Keystone()]  # Add other resorts here as needed
 
-    async def fetch_resort_data(resort):
+    async def fetch_resort_data(resort: Resort):
         return {
             "name": resort.__class__.__name__,
             "lift_open_percent": resort.lift_open_percent(),

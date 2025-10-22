@@ -23,7 +23,7 @@ class Copper(Resort):
         except Exception as e:
             return f"Error fetching lift data: {e}"
 
-    async def get_minutes_to_drive(self) -> str:
+    def get_minute_to_drive(self) -> str:
         destination_lat = 39.50211136344817  # Alpine lot
         destination_lng = -106.14069316085592
         try:

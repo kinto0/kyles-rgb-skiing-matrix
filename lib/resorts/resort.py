@@ -10,5 +10,5 @@ class Resort(ABC):
         pass
 
     @abstractmethod
-    async def get_minutes_to_drive(self) -> str:
+    def get_minutes_to_drive(self) -> str:
         pass

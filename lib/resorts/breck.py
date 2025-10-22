@@ -9,7 +9,7 @@ class Breck(Resort):
     def lift_open_percent(self) -> str:
         return "TODO"
 
-    async def get_minutes_to_drive(self) -> str:
+    def get_minute_to_drive(self) -> str:
         destination_lat = 39.48659659378005  # North gondola parking lot
         destination_lng = -106.04711242296264
         try:
