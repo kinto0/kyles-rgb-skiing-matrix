@@ -9,6 +9,7 @@ import os
 from dotenv import load_dotenv
 
 def time_to_drive_to(destination_lat: float, destination_lng: float) -> int:
+    return 0
     load_dotenv()
     start_lat = float(os.getenv("START_LATITUDE", "0.0"))
     start_lng = float(os.getenv("START_LONGITUDE", "0.0"))

@@ -1,6 +1,8 @@
+from lib.weather_api import Weather
 from lib.maps import time_to_drive_to
 from lib.colors import Color
 from abc import ABC, abstractmethod
+from lib.weather_api import get_weather
 
 class Resort(ABC):
     @abstractmethod
@@ -18,6 +20,15 @@ class Resort(ABC):
             return f"{duration_minutes} min"
         except Exception as e:
             return f"Error calculating drive time: {e}"
+
+    async def get_weather(self) -> Weather:
+        destination_lat, destination_lng = self.get_coords()
+        try:
+            weather = await get_weather(destination_lat, destination_lng)
+            return weather
+        except Exception as e:
+            print(f"[{self.get_short_name()}] Error fetching weather data: {e}")
+            return Weather()
 
 
     @abstractmethod

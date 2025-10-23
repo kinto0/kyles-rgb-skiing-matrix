@@ -23,6 +23,7 @@ class ResortStats:
     drive_time: str
     short_name: str
     text_color: Color
+    weather: Weather
 
 # Cached data
 resort_stats: List[ResortStats] = []
@@ -37,15 +38,17 @@ async def update_resort_cache():
     global resort_stats
     while True:
         resort_stats = []
-        for resort in resorts:
-            resort_name = resort.__class__.__name__
-            resort_stats.append(ResortStats(
+        async def fetch_resort_stats(resort):
+            return ResortStats(
                 resort.lift_open_percent(),
                 resort.get_recent_snowfall(),
                 resort.get_minutes_to_drive(),
                 resort.get_short_name(),
                 resort.get_text_color(),
-            ))
+                await resort.get_weather(),
+            )
+
+        resort_stats = await asyncio.gather(*(fetch_resort_stats(resort) for resort in resorts))
         await asyncio.sleep(6000)  # Update every 100 minutes (for now while I'm working out the kinks)
 
 async def draw():
@@ -68,6 +71,11 @@ async def draw():
         green = int(255 * (stat.lift_percent / 100))
         line_color = Color(red, green, 0)
         matrix.drawLine(0, y_offset + 8, line_length, y_offset + 6, line_color)
+
+        if stat.weather.icon_paths:
+            icon_path = stat.weather.icon_paths[half_seconds % len(stat.weather.icon_paths)]
+            matrix.setImage(icon_path, 17, y_offset)
+
 
         matrix.drawText(30, y_offset, text_color, f'{stat.snowfall}"')
         matrix.drawText(42, y_offset, text_color, f'{stat.drive_time}')
