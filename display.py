@@ -29,7 +29,12 @@ class ResortStats:
 resort_stats: List[ResortStats] = []
 
 # List of resort instances
-resorts = [Breck(), Copper(), ABasin(), Keystone()]
+resorts = [
+    # Breck(),
+    # Copper(),
+    ABasin(),
+    # Keystone()
+    ]
 
 tasks = {}
 

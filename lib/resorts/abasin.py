@@ -46,7 +46,8 @@ class ABasin(Resort):
             print(f"[abasin] Past 48HR snowfall: {past_48hr}")
             return int(past_48hr)
         except Exception as e:
-            return f"Error fetching snowfall data: {e}"
+            print(f"Error fetching snowfall data: {e}")
+            return 0
 
     def get_short_name(self) -> str:
         return "ABay"
