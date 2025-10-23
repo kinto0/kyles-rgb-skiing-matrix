@@ -1,4 +1,4 @@
-from matrix_api import Color
+from lib.colors import Color
 from abc import ABC, abstractmethod
 
 class Resort(ABC):

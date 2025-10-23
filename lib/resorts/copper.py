@@ -1,5 +1,5 @@
-from matrix_api import IKON_COLOR
-from matrix_api import Color
+from lib.colors import IKON_COLOR
+from lib.colors import Color
 from datetime import datetime
 from lib.resorts.resort import Resort
 from dotenv import load_dotenv

@@ -1,5 +1,5 @@
-from matrix_api import EPIC_COLOR
-from matrix_api import Color
+from lib.colors import EPIC_COLOR
+from lib.colors import Color
 from lib.resorts.resort import Resort
 import requests
 from bs4 import BeautifulSoup
