@@ -47,6 +47,6 @@ async def get_weather() -> Weather:
             icon_paths = get_icon_paths(content['daily'][0]['weather'][0]['id'])
             return Weather(icon_paths, current, low, high)
         except Exception as e:
-            print(e)
+            print(f'error getting weather: {e}')
             return Weather()
  
