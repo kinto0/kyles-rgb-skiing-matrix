@@ -6,7 +6,7 @@ import time
 import asyncio
 from datetime import datetime, timedelta
 from lib.matrix_api import Matrix
-from lib.color import Color
+from lib.colors import Color
 from weather_api import get_weather, Weather
 from lib.resorts import Breck, Copper, ABasin, Keystone
 import signal, sys
