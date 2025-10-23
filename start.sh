@@ -1,1 +1,1 @@
-sudo ./.venv/bin/python ./display.py >> output 2>&1 &
+sudo .venv/bin/python ./display.py >> output 2>&1 &
