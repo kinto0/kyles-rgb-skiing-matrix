@@ -23,7 +23,7 @@ class ABasin(Resort):
                         return "No lifts found."
                     else:
                         open_percentage = (open_lifts / total_lifts) * 100
-                        return f"{open_percentage:.2f}%"
+                        return f"{open_percentage:.0f}%"
             
             return "No lift data found."
         except Exception as e:

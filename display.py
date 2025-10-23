@@ -55,10 +55,10 @@ async def draw():
     # Divide the space into sections for each resort
     section_height = 8  # Each resort gets 8 pixels of vertical space
     for i, stat in enumerate(resort_stats):
-        y_offset = i * section_height
+        y_offset = 6 + i * section_height
 
         matrix.drawText(0, y_offset, text_color, stat.short_name)
-        matrix.drawText(16, y_offset, text_color, f'{stat.lift_percent} Open')
+        matrix.drawText(18, y_offset, text_color, f'{stat.lift_percent} Open')
         matrix.drawText(32, y_offset, text_color, f'{stat.snowfall}"')
         matrix.drawText(48, y_offset, text_color, f'{stat.drive_time}')
 
