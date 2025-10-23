@@ -58,7 +58,7 @@ async def draw():
         y_offset = 6 + i * section_height
 
         matrix.drawText(0, y_offset, text_color, stat.short_name)
-        matrix.drawText(18, y_offset, text_color, f'{stat.lift_percent} Open')
+        matrix.drawText(18, y_offset, text_color, f'{stat.lift_percent}')
         matrix.drawText(32, y_offset, text_color, f'{stat.snowfall}"')
         matrix.drawText(48, y_offset, text_color, f'{stat.drive_time}')
 

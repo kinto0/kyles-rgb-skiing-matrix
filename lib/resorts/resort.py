@@ -15,5 +15,5 @@ class Resort(ABC):
 
     @abstractmethod
     def get_short_name(self) -> str:
-        """Should be 3 characters?"""
+        """Should be 4 characters?"""
         pass

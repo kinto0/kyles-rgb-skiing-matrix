@@ -22,4 +22,4 @@ class Breck(Resort):
         return 'todo'
 
     def get_short_name(self) -> str:
-        return 'Breck'
+        return 'Brck'
