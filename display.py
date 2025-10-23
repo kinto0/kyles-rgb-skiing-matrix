@@ -45,7 +45,7 @@ async def update_resort_cache():
                 resort.get_short_name(),
                 resort.get_text_color(),
             ))
-        await asyncio.sleep(900)  # Update every 15 minutes
+        await asyncio.sleep(600)  # Update every 10 minutes
 
 async def draw():
     global half_seconds, resorts, resort_stats
