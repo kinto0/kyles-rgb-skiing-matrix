@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+from typing import List
+from typing import Dict
+from dataclasses import dataclass
 import time
 import asyncio
 from datetime import datetime, timedelta
@@ -13,24 +16,33 @@ no_color = Color(0, 0, 0)
 half_seconds: int = 0
 
 # Cached data
-resort_stats = {}  # Cached resort stats
+resort_stats: List[ResortStats] = []
 
 # List of resort instances
 resorts = [Breck(), Copper(), ABasin(), Keystone()]
 
 tasks = {}
 
+@dataclass
+class ResortStats:
+    lift_percent: str
+    snowfall: str
+    drive_time: str
+    short_name: str
+
 async def update_resort_cache():
     """Update the cached resort stats every 15 minutes."""
     global resort_stats
     while True:
+        resort_stats = []
         for resort in resorts:
             resort_name = resort.__class__.__name__
-            resort_stats[resort_name] = {
-                "lift_percent": resort.lift_open_percent(),
-                "snowfall": resort.get_recent_snowfall(),
-                "drive_time": resort.get_minutes_to_drive(),
-            }
+            resort_stats.append(ResortStats(
+                resort.lift_open_percent(),
+                resort.get_recent_snowfall(),
+                resort.get_minutes_to_drive(),
+                resort.get_short_name()
+            ))
         await asyncio.sleep(900)  # Update every 15 minutes
 
 async def draw():
@@ -42,22 +54,13 @@ async def draw():
 
     # Divide the space into sections for each resort
     section_height = 8  # Each resort gets 8 pixels of vertical space
-    for i, resort in enumerate(resorts):
+    for i, stat in enumerate(resort_stats):
         y_offset = i * section_height
-        resort_name = resort.__class__.__name__
 
-        # Display resort name
-        matrix.drawText(0, y_offset, text_color, resort_name)
-
-        # Display cached resort stats
-        if resort_name in resort_stats:
-            stats = resort_stats[resort_name]
-            matrix.drawText(0, y_offset + 6, text_color, f'Lifts: {stats["lift_percent"]}')
-            matrix.drawText(0, y_offset + 12, text_color, f'Snow: {stats["snowfall"]}')
-            matrix.drawText(0, y_offset + 18, text_color, f'Drive: {stats["drive_time"]}')
-
-    # Refresh the matrix to display the updated content
-    matrix.tick()
+        matrix.drawText(0, y_offset, text_color, stat.short_name)
+        matrix.drawText(0, y_offset + 6, text_color, f'Lifts: {stat.lift_percent}')
+        matrix.drawText(0, y_offset + 12, text_color, f'Snow: {stat.snowfall}')
+        matrix.drawText(0, y_offset + 18, text_color, f'Drive: {stat.drive_time}')
 
 async def run_draw_loop():
     """Continuously draw the display."""

@@ -20,3 +20,6 @@ class Breck(Resort):
 
     def get_recent_snowfall(self) -> str:
         return 'todo'
+
+    def get_short_name(self) -> str:
+        return 'Breck'

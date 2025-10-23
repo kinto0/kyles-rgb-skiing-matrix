@@ -54,3 +54,6 @@ class Keystone(Resort):
 
     def get_recent_snowfall(self) -> str:
         return "TODO"
+
+    def get_short_name(self) -> str:
+        return "Kstn"

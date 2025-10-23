@@ -12,3 +12,8 @@ class Resort(ABC):
     @abstractmethod
     def get_minutes_to_drive(self) -> str:
         pass
+
+    @abstractmethod
+    def get_short_name(self) -> str:
+        """Should be 3 characters?"""
+        pass
