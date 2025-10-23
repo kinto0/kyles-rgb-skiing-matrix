@@ -13,20 +13,12 @@ no_color = Color(0, 0, 0)
 half_seconds: int = 0
 
 # Cached data
-current_weather = None  # Cached weather data
 resort_stats = {}  # Cached resort stats
 
 # List of resort instances
 resorts = [Breck(), Copper(), ABasin(), Keystone()]
 
 tasks = {}
-
-async def update_weather_cache():
-    """Update the cached weather data every hour."""
-    global current_weather
-    while True:
-        current_weather = await get_weather()
-        await asyncio.sleep(3600)  # Update every hour
 
 async def update_resort_cache():
     """Update the cached resort stats every 15 minutes."""
@@ -42,23 +34,16 @@ async def update_resort_cache():
         await asyncio.sleep(900)  # Update every 15 minutes
 
 async def draw():
-    global half_seconds, current_weather, resorts, resort_stats
+    global half_seconds, resorts, resort_stats
     half_seconds += 1
 
     # Clear the canvas by refreshing it
     matrix.tick()
 
-    # Display current weather at the top
-    if current_weather:
-        matrix.drawText(0, 0, text_color, f'Weather: {current_weather.current}°, {current_weather.low}°-{current_weather.high}°')
-        if current_weather.icon_paths:
-            icon_path = current_weather.icon_paths[half_seconds % len(current_weather.icon_paths)]
-            matrix.setImage(icon_path, 50, 0)
-
-    # Divide the remaining space into sections for each resort
+    # Divide the space into sections for each resort
     section_height = 8  # Each resort gets 8 pixels of vertical space
     for i, resort in enumerate(resorts):
-        y_offset = 10 + i * section_height  # Start below the weather section
+        y_offset = i * section_height
         resort_name = resort.__class__.__name__
 
         # Display resort name
@@ -102,7 +87,6 @@ async def main():
 
     await asyncio.gather(
         run_draw_loop(),
-        update_weather_cache(),
         update_resort_cache()
     )
 
