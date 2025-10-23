@@ -67,7 +67,7 @@ async def draw():
         red = int(255 * (1 - stat.lift_percent / 100))
         green = int(255 * (stat.lift_percent / 100))
         line_color = Color(red, green, 0)
-        matrix.drawLine(1, y_offset + 6, line_length, y_offset + 6, line_color)
+        matrix.drawLine(0, y_offset + 8, line_length, y_offset + 6, line_color)
 
         matrix.drawText(30, y_offset, text_color, f'{stat.snowfall}"')
         matrix.drawText(42, y_offset, text_color, f'{stat.drive_time}')
