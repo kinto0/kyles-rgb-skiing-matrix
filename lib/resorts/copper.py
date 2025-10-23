@@ -1,3 +1,4 @@
+from typing import Tuple
 from lib.colors import IKON_COLOR
 from lib.colors import Color
 from datetime import datetime
@@ -35,5 +36,5 @@ class Copper(Resort):
     def get_text_color(self) -> Color:
         return IKON_COLOR
 
-    def get_coords(self) -> tuple[float, float]:
+    def get_coords(self) -> Tuple[float, float]:
         return (39.50211136344817, -106.14069316085592)  # Alpine lot

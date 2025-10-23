@@ -1,3 +1,4 @@
+from typing import Tuple
 from lib.colors import Color
 from lib.colors import EPIC_COLOR
 from lib.resorts.resort import Resort
@@ -58,5 +59,5 @@ class Keystone(Resort):
     def get_text_color(self) -> Color:
         return EPIC_COLOR
 
-    def get_coords(self) -> tuple[float, float]:
+    def get_coords(self) -> Tuple[float, float]:
         return (39.60895859258185, -105.9438314730835) # river run lot

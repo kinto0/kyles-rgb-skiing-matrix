@@ -1,3 +1,4 @@
+from typing import Tuple
 from lib.colors import IKON_COLOR
 from lib.colors import Color
 from lib.resorts.resort import Resort
@@ -42,7 +43,7 @@ class ABasin(Resort):
             
             # Extract snowfall data for the past 48 hours
             past_48hr = soup.find("div", class_="small-desc", text="Past 48HR").find_previous("h5", class_="big-number").text.strip()
-
+            print(f"[abasin] Past 48HR snowfall: {past_48hr}")
             return f"{past_48hr}"
         except Exception as e:
             return f"Error fetching snowfall data: {e}"
@@ -53,5 +54,5 @@ class ABasin(Resort):
     def get_text_color(self) -> Color:
         return IKON_COLOR
 
-    def get_coords(self) -> tuple[float, float]:
+    def get_coords(self) -> Tuple[float, float]:
         return (39.63424085075325, -105.87140342042032)  # Arapahoe Basin, CO

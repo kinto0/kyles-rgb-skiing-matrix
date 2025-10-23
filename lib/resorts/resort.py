@@ -1,3 +1,4 @@
+from typing import Tuple
 from lib.weather_api import Weather
 from lib.maps import time_to_drive_to
 from lib.colors import Color
@@ -41,6 +42,6 @@ class Resort(ABC):
         pass
 
     @abstractmethod
-    def get_coords(self) -> tuple[float, float]:
+    def get_coords(self) -> Tuple[float, float]:
         """Returns the latitude and longitude of the resort."""
         pass

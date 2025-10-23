@@ -1,3 +1,4 @@
+from typing import Tuple
 from lib.colors import EPIC_COLOR
 from lib.colors import Color
 from lib.resorts.resort import Resort
@@ -20,5 +21,5 @@ class Breck(Resort):
     def get_text_color(self) -> Color:
         return EPIC_COLOR
 
-    def get_coords(self) -> tuple[float, float]:
+    def get_coords(self) -> Tuple[float, float]:
         return (39.48659659378005, -106.04711242296264) # north gondola parking lot
