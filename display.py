@@ -45,7 +45,7 @@ async def update_resort_cache():
                 resort.get_minutes_to_drive(),
                 resort.get_short_name(),
                 resort.get_text_color(),
-                Weather(icon_paths=[f'icons/snow-0.png', f'icons/snow-1.png']))
+                Weather(icon_paths=[f'icons/snow-0.png', f'icons/snow-1.png'])
                 # await resort.get_weather(),
             )
 
