@@ -22,36 +22,32 @@ class Keystone(Resort):
                 None
             )
             if not data_script:
-                return "No lift data found."
+                print("[keystone] Could not find terrain status script.")
+                return 0
 
             # Extract the JSON object from the JavaScript
             match = re.search(r"TerrainStatusFeed\s*=\s*({.*?});", data_script, re.DOTALL)
             if not match:
-                return "No lift data found."
+                print("[keystone] Could not find terrain status feed.")
+                return 0
 
             lift_data = json.loads(match.group(1)).get("Lifts", [])
             if not lift_data:
-                return "No lift data found."
+                print("[keystone] No lift data found.")
+                return 0
 
             # Calculate open lifts percentage
             total_lifts = len(lift_data)
             open_lifts = sum(1 for lift in lift_data if lift.get("Status") == 1)  # Status 1 = open
 
             if total_lifts == 0:
-                return "No lifts found."
+                print("[keystone] Total lifts is zero.")
+                return 0
             else:
                 return int((open_lifts / total_lifts) * 100)
         except Exception as e:
-            return f"Error fetching lift data: {e}"
-
-    def get_minutes_to_drive(self) -> str:
-        destination_lat = 39.60895859258185  # River Run Lot, Keystone Resort, CO
-        destination_lng = -105.9438314730835
-        try:
-            duration_minutes = time_to_drive_to(destination_lat, destination_lng)
-            return f"{duration_minutes} min"
-        except Exception as e:
-            return f"Error calculating drive time: {e}"
+            print(f"[keystone] Error fetching lift data: {e}")
+            return 0
 
     def get_recent_snowfall(self) -> str:
         return "X"
@@ -61,3 +57,6 @@ class Keystone(Resort):
 
     def get_text_color(self) -> Color:
         return EPIC_COLOR
+
+    def get_coords(self) -> tuple[float, float]:
+        return (39.60895859258185, -105.9438314730835) # river run lot

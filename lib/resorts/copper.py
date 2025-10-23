@@ -18,20 +18,13 @@ class Copper(Resort):
             open_lifts = sum(1 for lift in lifts if lift.get("status") == "open")
 
             if total_lifts == 0:
-                return "No lifts found."
+                print("[copper] Total lifts is zero.")
+                return 0
             else:
                 return int((open_lifts / total_lifts) * 100)
         except Exception as e:
-            return f"Error fetching lift data: {e}"
-
-    def get_minutes_to_drive(self) -> str:
-        destination_lat = 39.50211136344817  # Alpine lot
-        destination_lng = -106.14069316085592
-        try:
-            duration_minutes = time_to_drive_to(destination_lat, destination_lng)
-            return f"{duration_minutes} min"
-        except Exception as e:
-            return f"Error calculating drive time: {e}"
+            print(f"[copper] Error fetching lift data: {e}")
+            return 0
 
     def get_recent_snowfall(self) -> str:
         return "X"
@@ -41,3 +34,6 @@ class Copper(Resort):
 
     def get_text_color(self) -> Color:
         return IKON_COLOR
+
+    def get_coords(self) -> tuple[float, float]:
+        return (39.50211136344817, -106.14069316085592)  # Alpine lot

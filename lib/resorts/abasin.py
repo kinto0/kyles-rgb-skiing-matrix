@@ -22,22 +22,16 @@ class ABasin(Resort):
                     open_lifts, total_lifts = map(int, lifts_text.split("/"))
                     
                     if total_lifts == 0:
-                        return "No lifts found."
+                        print("[abasin] Total lifts is zero.")
+                        return 0
                     else:
                         return int((open_lifts / total_lifts) * 100)
             
-            return "No lift data found."
+            print("[abasin] Could not find lift data.")
+            return 0
         except Exception as e:
-            return f"Error fetching lift data: {e}"
-
-    def get_minutes_to_drive(self) -> str:
-        destination_lat = 39.63424085075325  # coordinates for Arapahoe Basin, CO
-        destination_lng = -105.87140342042032
-        try:
-            duration_minutes = time_to_drive_to(destination_lat, destination_lng)
-            return f"{duration_minutes} min"
-        except Exception as e:
-            return f"Error calculating drive time: {e}"
+            print(f"[abasin] error fetching lift data: {e}")
+            return 0
 
     def get_recent_snowfall(self) -> str:
         url = "https://www.arapahoebasin.com/snow-report/"
@@ -58,3 +52,6 @@ class ABasin(Resort):
 
     def get_text_color(self) -> Color:
         return IKON_COLOR
+
+    def get_coords(self) -> tuple[float, float]:
+        return (39.63424085075325, -105.87140342042032)  # Arapahoe Basin, CO

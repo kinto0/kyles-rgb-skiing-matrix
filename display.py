@@ -63,13 +63,13 @@ async def draw():
         matrix.drawText(0, y_offset, stat.text_color, stat.short_name)
 
         # open percent line
-        line_length = int(16 * (stat.lift_percent / 100))
+        line_length = int(1 + 16 * (stat.lift_percent / 100))
         red = int(255 * (1 - stat.lift_percent / 100))
         green = int(255 * (stat.lift_percent / 100))
         line_color = Color(red, green, 0)
         matrix.drawLine(1, y_offset + 6, line_length, y_offset + 6, line_color)
-        
-        matrix.drawText(32, y_offset, text_color, f'{stat.snowfall}"')
+
+        matrix.drawText(30, y_offset, text_color, f'{stat.snowfall}"')
         matrix.drawText(42, y_offset, text_color, f'{stat.drive_time}')
 
 async def run_draw_loop():
