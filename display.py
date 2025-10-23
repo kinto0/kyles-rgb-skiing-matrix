@@ -15,6 +15,13 @@ text_color = Color(200, 200, 200)
 no_color = Color(0, 0, 0)
 half_seconds: int = 0
 
+@dataclass
+class ResortStats:
+    lift_percent: str
+    snowfall: str
+    drive_time: str
+    short_name: str
+
 # Cached data
 resort_stats: List[ResortStats] = []
 
@@ -22,13 +29,6 @@ resort_stats: List[ResortStats] = []
 resorts = [Breck(), Copper(), ABasin(), Keystone()]
 
 tasks = {}
-
-@dataclass
-class ResortStats:
-    lift_percent: str
-    snowfall: str
-    drive_time: str
-    short_name: str
 
 async def update_resort_cache():
     """Update the cached resort stats every 15 minutes."""
@@ -58,9 +58,9 @@ async def draw():
         y_offset = i * section_height
 
         matrix.drawText(0, y_offset, text_color, stat.short_name)
-        matrix.drawText(0, y_offset + 6, text_color, f'Lifts: {stat.lift_percent}')
-        matrix.drawText(0, y_offset + 12, text_color, f'Snow: {stat.snowfall}')
-        matrix.drawText(0, y_offset + 18, text_color, f'Drive: {stat.drive_time}')
+        matrix.drawText(0, y_offset + 6, text_color, f'{stat.lift_percent} Open')
+        matrix.drawText(0, y_offset + 12, text_color, f'{stat.snowfall}"')
+        matrix.drawText(0, y_offset + 18, text_color, f'{stat.drive_time}')
 
 async def run_draw_loop():
     """Continuously draw the display."""
