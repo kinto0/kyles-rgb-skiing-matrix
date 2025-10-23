@@ -42,9 +42,9 @@ async def update_resort_cache():
         resort_stats = []
         async def fetch_resort_stats(resort):
             return ResortStats(
-                resort.lift_open_percent(),
-                resort.get_recent_snowfall(),
-                resort.get_minutes_to_drive(),
+                52, # resort.lift_open_percent(),
+                "2", # resort.get_recent_snowfall(),
+                "12", # resort.get_minutes_to_drive(),
                 resort.get_short_name(),
                 resort.get_text_color(),
                 Weather(icon_paths=[f'icons/snow-0.png', f'icons/snow-1.png'])
