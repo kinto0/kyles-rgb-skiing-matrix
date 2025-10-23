@@ -42,9 +42,15 @@ class ABasin(Resort):
             soup = BeautifulSoup(response.text, "html.parser")
             
             # Extract snowfall data for the past 48 hours
-            past_48hr = soup.find("div", class_="small-desc", text="Past 48HR").find_previous("h5", class_="big-number").text.strip()
-            print(f"[abasin] Past 48HR snowfall: {past_48hr}")
-            return int(past_48hr.replace('"', ''))
+            past_48hr_element = soup.find("div", class_="small-desc", text="Past 48HR")
+            if past_48hr_element is not None:
+                past_48hr = past_48hr_element.find_previous("h5", class_="big-number").text.strip()
+                past_48hr = past_48hr.replace('”', '"').replace('"', '')  # Normalize and remove quotes
+                print(f"[abasin] Past 48HR snowfall: {past_48hr}")
+                return int(past_48hr)
+            else:
+                print("[abasin] Could not find snowfall data.")
+                return 0
         except Exception as e:
             print(f"Error fetching snowfall data: {e}")
             return 0
