@@ -1,3 +1,5 @@
+from matrix_api import EPIC_COLOR
+from matrix_api import Color
 from lib.resorts.resort import Resort
 import requests
 from bs4 import BeautifulSoup
@@ -23,3 +25,6 @@ class Breck(Resort):
 
     def get_short_name(self) -> str:
         return 'Brck'
+
+    def get_text_color(self) -> Color:
+        return EPIC_COLOR

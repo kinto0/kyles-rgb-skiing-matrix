@@ -1,3 +1,5 @@
+from matrix_api import IKON_COLOR
+from matrix_api import Color
 from datetime import datetime
 from lib.resorts.resort import Resort
 from dotenv import load_dotenv
@@ -37,3 +39,6 @@ class Copper(Resort):
     
     def get_short_name(self) -> str:
         return "Copr"
+
+    def get_text_color(self) -> Color:
+        return IKON_COLOR

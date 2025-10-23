@@ -1,3 +1,5 @@
+from matrix_api import IKON_COLOR
+from matrix_api import Color
 from lib.resorts.resort import Resort
 import requests
 from bs4 import BeautifulSoup
@@ -54,3 +56,6 @@ class ABasin(Resort):
 
     def get_short_name(self) -> str:
         return "ABay"
+
+    def get_text_color(self) -> Color:
+        return IKON_COLOR

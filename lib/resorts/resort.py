@@ -1,3 +1,4 @@
+from matrix_api import Color
 from abc import ABC, abstractmethod
 
 class Resort(ABC):
@@ -16,4 +17,8 @@ class Resort(ABC):
     @abstractmethod
     def get_short_name(self) -> str:
         """Should be 4 characters?"""
+        pass
+
+    @abstractmethod
+    def get_text_color(self) -> Color:
         pass

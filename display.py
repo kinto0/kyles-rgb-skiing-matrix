@@ -21,6 +21,7 @@ class ResortStats:
     snowfall: str
     drive_time: str
     short_name: str
+    text_color: Color
 
 # Cached data
 resort_stats: List[ResortStats] = []
@@ -41,7 +42,8 @@ async def update_resort_cache():
                 resort.lift_open_percent(),
                 resort.get_recent_snowfall(),
                 resort.get_minutes_to_drive(),
-                resort.get_short_name()
+                resort.get_short_name(),
+                resort.get_text_color(),
             ))
         await asyncio.sleep(900)  # Update every 15 minutes
 
@@ -57,7 +59,7 @@ async def draw():
     for i, stat in enumerate(resort_stats):
         y_offset = 6 + i * section_height
 
-        matrix.drawText(0, y_offset, text_color, stat.short_name)
+        matrix.drawText(0, y_offset, stat.text_color, stat.short_name)
         matrix.drawText(18, y_offset, text_color, f'{stat.lift_percent}')
         matrix.drawText(32, y_offset, text_color, f'{stat.snowfall}"')
         matrix.drawText(48, y_offset, text_color, f'{stat.drive_time}')

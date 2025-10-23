@@ -1,3 +1,5 @@
+from matrix_api import Color
+from matrix_api import EPIC_COLOR
 from lib.resorts.resort import Resort
 import requests
 from bs4 import BeautifulSoup
@@ -57,3 +59,6 @@ class Keystone(Resort):
 
     def get_short_name(self) -> str:
         return "Kstn"
+
+    def get_text_color(self) -> Color:
+        return EPIC_COLOR
