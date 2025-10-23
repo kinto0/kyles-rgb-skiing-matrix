@@ -86,7 +86,7 @@ async def draw():
             matrix.setImage(icon_path, 17, y_offset - 5)
         matrix.drawText(24, y_offset, text_color, f'{stat.weather.current}°')
 
-        matrix.drawText(36, y_offset, text_color, f'{stat.snowfall}"')
+        matrix.drawText(37, y_offset, text_color, f'{stat.snowfall}"')
         matrix.drawText(45, y_offset, text_color, f'{stat.drive_time}')
 
 async def run_draw_loop():
