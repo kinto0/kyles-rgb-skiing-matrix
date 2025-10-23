@@ -44,7 +44,7 @@ class ABasin(Resort):
             # Extract snowfall data for the past 48 hours
             past_48hr = soup.find("div", class_="small-desc", text="Past 48HR").find_previous("h5", class_="big-number").text.strip()
             print(f"[abasin] Past 48HR snowfall: {past_48hr}")
-            return int(past_48hr)
+            return int(past_48hr.replace('"', ''))
         except Exception as e:
             print(f"Error fetching snowfall data: {e}")
             return 0
