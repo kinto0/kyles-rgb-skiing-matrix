@@ -30,10 +30,10 @@ resort_stats: List[ResortStats] = []
 
 # List of resort instances
 resorts = [
-    # Breck(),
-    # Copper(),
+    Breck(),
+    Copper(),
     ABasin(),
-    # Keystone()
+    Keystone()
     ]
 
 tasks = {}
