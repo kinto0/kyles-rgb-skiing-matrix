@@ -45,7 +45,8 @@ async def update_resort_cache():
                 resort.get_minutes_to_drive(),
                 resort.get_short_name(),
                 resort.get_text_color(),
-                await resort.get_weather(),
+                Weather()
+                # await resort.get_weather(),
             )
 
         resort_stats = await asyncio.gather(*(fetch_resort_stats(resort) for resort in resorts))
