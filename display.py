@@ -44,11 +44,10 @@ async def update_resort_cache():
             return ResortStats(
                 52, # resort.lift_open_percent(),
                 "2", # resort.get_recent_snowfall(),
-                "12", # resort.get_minutes_to_drive(),
+                "12 min", # resort.get_minutes_to_drive(),
                 resort.get_short_name(),
                 resort.get_text_color(),
-                Weather(icon_paths=[f'icons/snow-0.png', f'icons/snow-1.png'])
-                # await resort.get_weather(),
+                await resort.get_weather(),
             )
         refreshing = True
         resort_stats = await asyncio.gather(*(fetch_resort_stats(resort) for resort in resorts))
