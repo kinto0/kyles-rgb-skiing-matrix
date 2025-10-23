@@ -35,7 +35,7 @@ class Copper(Resort):
             return f"Error calculating drive time: {e}"
 
     def get_recent_snowfall(self) -> str:
-        return "TODO"
+        return "X"
     
     def get_short_name(self) -> str:
         return "Copr"

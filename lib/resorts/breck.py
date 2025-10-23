@@ -9,7 +9,7 @@ import json
 
 class Breck(Resort):
     def lift_open_percent(self) -> str:
-        return "TODO"
+        return "X"
 
     def get_minutes_to_drive(self) -> str:
         destination_lat = 39.48659659378005  # North gondola parking lot
@@ -21,7 +21,7 @@ class Breck(Resort):
             return f"Error calculating drive time: {e}"
 
     def get_recent_snowfall(self) -> str:
-        return 'todo'
+        return 'X'
 
     def get_short_name(self) -> str:
         return 'Brck'
