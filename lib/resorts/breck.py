@@ -8,8 +8,8 @@ import re
 import json
 
 class Breck(Resort):
-    def lift_open_percent(self) -> str:
-        return "X"
+    def lift_open_percent(self) -> int:
+        return 0
 
     def get_minutes_to_drive(self) -> str:
         destination_lat = 39.48659659378005  # North gondola parking lot

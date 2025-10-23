@@ -18,7 +18,7 @@ half_seconds: int = 0
 
 @dataclass
 class ResortStats:
-    lift_percent: str
+    lift_percent: int
     snowfall: str
     drive_time: str
     short_name: str
@@ -63,7 +63,7 @@ async def draw():
         matrix.drawText(0, y_offset, stat.text_color, stat.short_name)
         matrix.drawText(18, y_offset, text_color, f'{stat.lift_percent}')
         matrix.drawText(32, y_offset, text_color, f'{stat.snowfall}"')
-        matrix.drawText(48, y_offset, text_color, f'{stat.drive_time}')
+        matrix.drawText(42, y_offset, text_color, f'{stat.drive_time}')
 
 async def run_draw_loop():
     """Continuously draw the display."""

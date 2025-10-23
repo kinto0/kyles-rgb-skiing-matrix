@@ -8,7 +8,7 @@ from lib.maps import time_to_drive_to
 import requests
 
 class Copper(Resort):
-    def lift_open_percent(self) -> str:
+    def lift_open_percent(self) -> int:
         url = "https://api.coppercolorado.com/api/v1/dor/drupal/lifts"
         try:
             response = requests.get(url)  # Using requests to fetch data
@@ -20,8 +20,7 @@ class Copper(Resort):
             if total_lifts == 0:
                 return "No lifts found."
             else:
-                open_percentage = (open_lifts / total_lifts) * 100
-                return f"{open_percentage:.0f}%"
+                return int((open_lifts / total_lifts) * 100)
         except Exception as e:
             return f"Error fetching lift data: {e}"
 

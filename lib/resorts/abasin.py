@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 from lib.maps import time_to_drive_to
 
 class ABasin(Resort):
-    def lift_open_percent(self) -> str:
+    def lift_open_percent(self) -> int:
         url = "https://www.arapahoebasin.com/snow-report/"
         try:
             response = requests.get(url)
@@ -24,8 +24,7 @@ class ABasin(Resort):
                     if total_lifts == 0:
                         return "No lifts found."
                     else:
-                        open_percentage = (open_lifts / total_lifts) * 100
-                        return f"{open_percentage:.0f}%"
+                        return int((open_lifts / total_lifts) * 100)
             
             return "No lift data found."
         except Exception as e:

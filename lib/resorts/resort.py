@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 class Resort(ABC):
     @abstractmethod
-    def lift_open_percent(self) -> str:
+    def lift_open_percent(self) -> int:
         pass
 
     @abstractmethod
