@@ -68,6 +68,8 @@ async def draw():
 
     # Divide the space into sections for each resort
     section_height = 8  # Each resort gets 8 pixels of vertical space
+
+    resort_stats.sort(key=lambda x: x.drive_time)
     for i, stat in enumerate(resort_stats):
         y_offset = 6 + i * section_height
 
@@ -83,7 +85,7 @@ async def draw():
         if stat.weather.icon_paths:
             icon_path = stat.weather.icon_paths[half_seconds % len(stat.weather.icon_paths)]
             matrix.setImage(icon_path, 17, y_offset - 5)
-        matrix.drawText(30, y_offset, text_color, f'{stat.weather.current}°')
+        matrix.drawText(23, y_offset, text_color, f'{stat.weather.current}°')
 
         matrix.drawText(30, y_offset, text_color, f'{stat.snowfall}"')
         matrix.drawText(42, y_offset, text_color, f'{stat.drive_time}')
