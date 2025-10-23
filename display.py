@@ -33,9 +33,11 @@ resorts = [Breck(), Copper(), ABasin(), Keystone()]
 
 tasks = {}
 
+refreshing = False
+
 async def update_resort_cache():
     """Update the cached resort stats every 15 minutes."""
-    global resort_stats
+    global resort_stats, refreshing
     while True:
         resort_stats = []
         async def fetch_resort_stats(resort):
@@ -48,16 +50,21 @@ async def update_resort_cache():
                 Weather(icon_paths=[f'icons/snow-0.png', f'icons/snow-1.png'])
                 # await resort.get_weather(),
             )
-
+        refreshing = True
         resort_stats = await asyncio.gather(*(fetch_resort_stats(resort) for resort in resorts))
+        refreshing = False
         await asyncio.sleep(6000)  # Update every 100 minutes (for now while I'm working out the kinks)
 
 async def draw():
-    global half_seconds, resorts, resort_stats
+    global half_seconds, resorts, resort_stats, refreshing
     half_seconds += 1
 
     # Clear the canvas by refreshing it
     matrix.tick()
+
+    if refreshing:
+        matrix.drawText(0, 10, text_color, "Refreshing...")
+        return
 
     # Divide the space into sections for each resort
     section_height = 8  # Each resort gets 8 pixels of vertical space
@@ -67,11 +74,11 @@ async def draw():
         matrix.drawText(0, y_offset, stat.text_color, stat.short_name)
 
         # open percent line
-        line_length = int(1 + 16 * (stat.lift_percent / 100))
+        line_length = int(16 * (stat.lift_percent / 100))
         red = int(255 * (1 - stat.lift_percent / 100))
         green = int(255 * (stat.lift_percent / 100))
         line_color = Color(red, green, 0)
-        matrix.drawLine(0, y_offset + 8, line_length, y_offset + 8, line_color)
+        matrix.drawLine(0, y_offset - 1, line_length, y_offset - 1, line_color)
 
         # if stat.weather.icon_paths:
         #     icon_path = stat.weather.icon_paths[half_seconds % len(stat.weather.icon_paths)]
@@ -104,7 +111,6 @@ async def main():
     global matrix, text_color
 
     signal.signal(signal.SIGINT, exit_gracefully)
-    matrix.drawText(0, 10, text_color, "loading")
     matrix.tick()
 
     await asyncio.gather(
