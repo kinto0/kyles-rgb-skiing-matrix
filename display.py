@@ -73,9 +73,9 @@ async def draw():
         line_color = Color(red, green, 0)
         matrix.drawLine(0, y_offset + 8, line_length, y_offset + 6, line_color)
 
-        if stat.weather.icon_paths:
-            icon_path = stat.weather.icon_paths[half_seconds % len(stat.weather.icon_paths)]
-            matrix.setImage(icon_path, 17, y_offset)
+        # if stat.weather.icon_paths:
+        #     icon_path = stat.weather.icon_paths[half_seconds % len(stat.weather.icon_paths)]
+        #     matrix.setImage(icon_path, 17, y_offset)
 
 
         matrix.drawText(30, y_offset, text_color, f'{stat.snowfall}"')
