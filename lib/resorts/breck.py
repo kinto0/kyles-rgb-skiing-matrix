@@ -12,8 +12,8 @@ class Breck(Resort):
     def lift_open_percent(self) -> int:
         return 0
 
-    def get_recent_snowfall(self) -> str:
-        return 'X'
+    def get_recent_snowfall(self) -> int:
+        return 0
 
     def get_short_name(self) -> str:
         return 'Brck'

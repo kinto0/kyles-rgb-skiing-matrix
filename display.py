@@ -19,7 +19,7 @@ half_seconds: int = 0
 @dataclass
 class ResortStats:
     lift_percent: int
-    snowfall: str
+    snowfall: int
     drive_time: str
     short_name: str
     text_color: Color

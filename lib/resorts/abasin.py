@@ -34,7 +34,7 @@ class ABasin(Resort):
             print(f"[abasin] error fetching lift data: {e}")
             return 0
 
-    def get_recent_snowfall(self) -> str:
+    def get_recent_snowfall(self) -> int:
         url = "https://www.arapahoebasin.com/snow-report/"
         try:
             response = requests.get(url)
@@ -44,7 +44,7 @@ class ABasin(Resort):
             # Extract snowfall data for the past 48 hours
             past_48hr = soup.find("div", class_="small-desc", text="Past 48HR").find_previous("h5", class_="big-number").text.strip()
             print(f"[abasin] Past 48HR snowfall: {past_48hr}")
-            return f"{past_48hr}"
+            return int(past_48hr)
         except Exception as e:
             return f"Error fetching snowfall data: {e}"
 

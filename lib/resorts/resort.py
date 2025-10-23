@@ -11,7 +11,7 @@ class Resort(ABC):
         pass
 
     @abstractmethod
-    def get_recent_snowfall(self) -> str:
+    def get_recent_snowfall(self) -> int:
         pass
 
     def get_minutes_to_drive(self) -> str:

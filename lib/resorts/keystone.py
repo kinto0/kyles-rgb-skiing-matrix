@@ -50,8 +50,8 @@ class Keystone(Resort):
             print(f"[keystone] Error fetching lift data: {e}")
             return 0
 
-    def get_recent_snowfall(self) -> str:
-        return "X"
+    def get_recent_snowfall(self) -> int:
+        return 0
 
     def get_short_name(self) -> str:
         return "Kstn"
