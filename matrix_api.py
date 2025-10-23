@@ -11,8 +11,8 @@ class Color:
     g: int
     b: int
 
-EPIC_COLOR = Color(238, 107, 10)
-IKON_COLOR = Color(255, 199, 44)
+EPIC_COLOR = Color(218, 107, 10)
+IKON_COLOR = Color(17, 41, 71)
 
 class Matrix:
     """API for interacting with a matrix. After drawing what is desired, tick must be called to actually update the display."""
