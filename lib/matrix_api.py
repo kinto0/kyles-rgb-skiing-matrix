@@ -1,5 +1,5 @@
 from rgbmatrix import graphics, RGBMatrix, RGBMatrixOptions
-from colors import Color
+from lib.colors import Color
 from PIL import Image
 
 font = graphics.Font()
