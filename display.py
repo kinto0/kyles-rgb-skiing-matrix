@@ -82,8 +82,8 @@ async def draw():
 
         if stat.weather.icon_paths:
             icon_path = stat.weather.icon_paths[half_seconds % len(stat.weather.icon_paths)]
-            matrix.setImage(icon_path, 17, y_offset)
-
+            matrix.setImage(icon_path, 17, y_offset - 5)
+        matrix.drawText(30, y_offset, text_color, f'{stat.weather.current}°')
 
         matrix.drawText(30, y_offset, text_color, f'{stat.snowfall}"')
         matrix.drawText(42, y_offset, text_color, f'{stat.drive_time}')
