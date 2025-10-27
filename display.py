@@ -95,9 +95,9 @@ async def draw():
         matrix.drawText(37, y_offset, text_color, f'{stat.snowfall}"')
         # Calculate the color based on the ratio of drive_time to expected_drive_time
         ratio = stat.drive_time / stat.expected_drive_time
-        # Use a spectrum from green to yellow to red based on the ratio
+        # Adjust the spectrum to make it less green
         red = min(255, max(0, int(255 * (ratio - 1) / 0.5))) if ratio > 1 else 0
-        green = min(255, max(0, int(255 * (2 - ratio) / 0.5))) if ratio < 2 else 0
+        green = min(200, max(0, int(200 * (2 - ratio) / 0.5))) if ratio < 2 else 0
         drive_time_color = Color(red, green, 0)
 
         matrix.drawText(45, y_offset, drive_time_color, f'{stat.drive_time} min')
