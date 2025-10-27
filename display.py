@@ -80,10 +80,10 @@ async def draw():
         matrix.drawText(0, y_offset, stat.text_color, stat.short_name)
 
         # open percent line
-        line_length = 16  # Full length of the line
-        open_length = int(16 * (stat.lift_percent / 100))
-        matrix.drawLine(0, y_offset, open_length, y_offset, Color(0, 255, 0))  # Green for open percent
-        matrix.drawLine(open_length, y_offset, line_length, y_offset, Color(255, 0, 0))  # Red for remaining
+        line_length = 14  # Full length of the line (2 pixels shorter)
+        open_length = int(14 * (stat.lift_percent / 100))
+        matrix.drawLine(0, y_offset + 1, open_length, y_offset + 1, Color(0, 255, 0))  # Green for open percent
+        matrix.drawLine(open_length, y_offset + 1, line_length, y_offset + 1, Color(255, 0, 0))  # Red for remaining
 
         if stat.weather.icon_paths:
             icon_path = stat.weather.icon_paths[half_seconds % len(stat.weather.icon_paths)]
