@@ -23,3 +23,6 @@ class Breck(Resort):
 
     def get_coords(self) -> Tuple[float, float]:
         return (39.48659659378005, -106.04711242296264) # north gondola parking lot
+
+    def get_expected_minutes_to_drive(self) -> int:
+        return 18

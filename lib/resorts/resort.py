@@ -14,13 +14,17 @@ class Resort(ABC):
     def get_recent_snowfall(self) -> int:
         pass
 
-    def get_minutes_to_drive(self) -> str:
+    def get_minutes_to_drive(self) -> int:
         destination_lat, destination_lng = self.get_coords()
         try:
-            duration_minutes = time_to_drive_to(destination_lat, destination_lng)
-            return f"{duration_minutes} min"
+            return time_to_drive_to(destination_lat, destination_lng)
         except Exception as e:
-            return f"Error calculating drive time: {e}"
+            print("Error calculating drive time: {e}")
+            return 0
+
+    @abstractmethod
+    def get_expected_minutes_to_drive(self) -> int:
+        ...
 
     async def get_weather(self) -> Weather:
         destination_lat, destination_lng = self.get_coords()

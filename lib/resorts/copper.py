@@ -38,3 +38,6 @@ class Copper(Resort):
 
     def get_coords(self) -> Tuple[float, float]:
         return (39.50211136344817, -106.14069316085592)  # Alpine lot
+
+    def get_expected_minutes_to_drive(self) -> int:
+        return 11

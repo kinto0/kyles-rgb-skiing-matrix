@@ -20,7 +20,8 @@ half_seconds: int = 0
 class ResortStats:
     lift_percent: int
     snowfall: int
-    drive_time: str
+    drive_time: int
+    expected_drive_time: int
     short_name: str
     text_color: Color
     weather: Weather
@@ -50,6 +51,7 @@ async def update_resort_cache():
                 resort.lift_open_percent(),
                 resort.get_recent_snowfall(),
                 resort.get_minutes_to_drive(),
+                resort.get_expected_minutes_to_drive(),
                 resort.get_short_name(),
                 resort.get_text_color(),
                 await resort.get_weather(),
@@ -91,7 +93,14 @@ async def draw():
         matrix.drawText(24, y_offset, text_color, f'{stat.weather.current}°')
 
         matrix.drawText(37, y_offset, text_color, f'{stat.snowfall}"')
-        matrix.drawText(45, y_offset, text_color, f'{stat.drive_time}')
+        # Calculate the color based on the ratio of drive_time to expected_drive_time
+        ratio = stat.drive_time / stat.expected_drive_time
+        # Use a spectrum from green to yellow to red based on the ratio
+        red = min(255, max(0, int(255 * (ratio - 1) / 0.5))) if ratio > 1 else 0
+        green = min(255, max(0, int(255 * (2 - ratio) / 0.5))) if ratio < 2 else 0
+        drive_time_color = Color(red, green, 0)
+
+        matrix.drawText(45, y_offset, drive_time_color, f'{stat.drive_time} min')
 
 async def run_draw_loop():
     """Continuously draw the display."""

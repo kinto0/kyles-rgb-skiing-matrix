@@ -62,3 +62,6 @@ class ABasin(Resort):
 
     def get_coords(self) -> Tuple[float, float]:
         return (39.63424085075325, -105.87140342042032)  # Arapahoe Basin, CO
+
+    def get_expected_minutes_to_drive(self) -> int:
+        return 22

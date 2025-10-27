@@ -61,3 +61,6 @@ class Keystone(Resort):
 
     def get_coords(self) -> Tuple[float, float]:
         return (39.60895859258185, -105.9438314730835) # river run lot
+
+    def get_expected_minutes_to_drive(self) -> int:
+        return 16
