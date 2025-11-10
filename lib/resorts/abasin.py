@@ -46,7 +46,7 @@ class ABasin(Resort):
             if past_48hr_element is not None:
                 past_48hr = past_48hr_element.find_previous("h5", class_="big-number").text.strip()
                 past_48hr = past_48hr.replace('”', '"').replace('"', '')  # Normalize and remove quotes
-                return int(past_48hr)
+                return int(float(past_48hr))
             else:
                 print("[abasin] Could not find snowfall data.")
                 return 0
