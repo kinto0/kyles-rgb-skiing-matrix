@@ -83,7 +83,8 @@ async def draw():
 
         # open percent line
         line_length = 14  # Full length of the line (2 pixels shorter)
-        open_length = int(14 * (stat.lift_percent / 100))
+        open_length_float = 14 * (stat.lift_percent / 100)
+        open_length = 1 if 0 < open_length_float < 1 else int(open_length_float)
         matrix.drawLine(0, y_offset + 1, open_length, y_offset + 1, Color(0, 255, 0))  # Green for open percent
         matrix.drawLine(open_length, y_offset + 1, line_length, y_offset + 1, Color(255, 0, 0))  # Red for remaining
 
