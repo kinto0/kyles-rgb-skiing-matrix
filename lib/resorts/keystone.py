@@ -32,7 +32,7 @@ class Keystone(Resort):
         return int(recent_snowfall.replace("\"", ""))
 
     def get_short_name(self) -> str:
-        return 'Kystn'
+        return 'Kstn'
 
     def get_text_color(self) -> Color:
         return EPIC_COLOR
