@@ -4,7 +4,9 @@ from lib.resorts.breck import Breck
 from lib.resorts import Copper, ABasin, Keystone
 
 async def main():
-    resorts = [Breck(), Copper(), ABasin(), Keystone()]  # Add other resorts here as needed
+    resorts = [Breck(),
+     Copper(), ABasin(), Keystone()
+     ]  # Add other resorts here as needed
 
 
     for resort in resorts:

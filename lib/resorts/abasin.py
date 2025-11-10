@@ -2,57 +2,34 @@ from typing import Tuple
 from lib.colors import IKON_COLOR
 from lib.colors import Color
 from lib.resorts.resort import Resort
-import requests
-from bs4 import BeautifulSoup
-from lib.maps import time_to_drive_to
+from lib.onthesnow import fetch_and_parse, extract_section, parse_ratio, extract_last_table_value
+
+ONTHESNOW_URL = "https://www.onthesnow.com/colorado/arapahoe-basin-ski-area/skireport"
 
 class ABasin(Resort):
     def lift_open_percent(self) -> int:
-        url = "https://www.arapahoebasin.com/snow-report/"
-        try:
-            response = requests.get(url)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.text, "html.parser")
-            
-            # Locate the "Open Lifts" section
-            summary_blocks = soup.find_all("div", class_="summary-box")
-            for block in summary_blocks:
-                if block.find("p") and "Open Lifts" in block.find("p").text:
-                    # Extract the open and total lifts
-                    lifts_text = block.find("h5").text.strip()
-                    open_lifts, total_lifts = map(int, lifts_text.split("/"))
-                    
-                    if total_lifts == 0:
-                        print("[abasin] Total lifts is zero.")
-                        return 0
-                    else:
-                        return int((open_lifts / total_lifts) * 100)
-            
-            print("[abasin] Could not find lift data.")
-            return 0
-        except Exception as e:
-            print(f"[abasin] error fetching lift data: {e}")
-            return 0
+        soup = fetch_and_parse(ONTHESNOW_URL)
+        lifts_section = extract_section(soup, "lifts_section")
+
+        # Extract the "Lifts Open" text (e.g., "3/35 open")
+        lifts_text = lifts_section.find("div", class_="styles_metric__z_U_F").text.strip()
+        open_lifts, total_lifts = parse_ratio(lifts_text)
+
+        # Calculate the percentage of open lifts
+        return int((open_lifts / total_lifts) * 100) if total_lifts > 0 else 0
 
     def get_recent_snowfall(self) -> int:
-        url = "https://www.arapahoebasin.com/snow-report/"
-        try:
-            response = requests.get(url)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.text, "html.parser")
-            
-            # Extract snowfall data for the past 48 hours
-            past_48hr_element = soup.find("div", class_="small-desc", text="Past 48HR")
-            if past_48hr_element is not None:
-                past_48hr = past_48hr_element.find_previous("h5", class_="big-number").text.strip()
-                past_48hr = past_48hr.replace('”', '"').replace('"', '')  # Normalize and remove quotes
-                return int(float(past_48hr))
-            else:
-                print("[abasin] Could not find snowfall data.")
-                return 0
-        except Exception as e:
-            print(f"Error fetching snowfall data: {e}")
+        soup = fetch_and_parse(ONTHESNOW_URL)
+        snowfall_table = soup.find("table", class_="styles_snowChart__S2PJB")
+        if not snowfall_table:
+            print("Could not find the snowfall table on the page.")
             return 0
+
+        # Extract the most recent snowfall value
+        recent_snowfall = extract_last_table_value(
+            snowfall_table, "snowfall_cell", "snowfall_value"
+        )
+        return int(recent_snowfall.replace("\"", ""))
 
     def get_short_name(self) -> str:
         return "ABay"
