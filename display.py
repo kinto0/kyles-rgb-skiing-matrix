@@ -47,17 +47,23 @@ async def update_resort_cache():
     while True:
         resort_stats = []
         async def fetch_resort_stats(resort):
-            return ResortStats(
-                resort.lift_open_percent(),
-                resort.get_recent_snowfall(),
-                resort.get_minutes_to_drive(),
-                resort.get_expected_minutes_to_drive(),
-                resort.get_short_name(),
-                resort.get_text_color(),
-                await resort.get_weather(),
-            )
+            try:
+                return ResortStats(
+                    resort.lift_open_percent(),
+                    resort.get_recent_snowfall(),
+                    resort.get_minutes_to_drive(),
+                    resort.get_expected_minutes_to_drive(),
+                    resort.get_short_name(),
+                    resort.get_text_color(),
+                    await resort.get_weather(),
+                )
+            except Exception as e:
+                print(f"Error fetching stats for {resort.get_short_name()}: {e}")
+                return None  # Skip this resort if an error occurs
+
         refreshing = True
-        resort_stats = await asyncio.gather(*(fetch_resort_stats(resort) for resort in resorts))
+        results = await asyncio.gather(*(fetch_resort_stats(resort) for resort in resorts))
+        resort_stats = [stat for stat in results if stat is not None]
         refreshing = False
         await asyncio.sleep(6000)  # Update every 100 minutes (for now while I'm working out the kinks)
 
