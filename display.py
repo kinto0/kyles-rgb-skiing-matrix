@@ -65,7 +65,7 @@ async def update_resort_cache():
         results = await asyncio.gather(*(fetch_resort_stats(resort) for resort in resorts))
         resort_stats = [stat for stat in results if stat is not None]
         refreshing = False
-        await asyncio.sleep(6000)  # Update every 100 minutes (for now while I'm working out the kinks)
+        await asyncio.sleep(1440)  # 24 minutes (10,000 google requests free tier / 5 / 31 days)
 
 async def draw():
     global half_seconds, resorts, resort_stats, refreshing
