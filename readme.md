@@ -1,4 +1,7 @@
-### Kyle's RGB LED Matrix in Python
+### Kyle's RGB Skiing Matrix
+<img width="591" height="424" alt="image" src="https://github.com/user-attachments/assets/6aad2412-21fc-415c-af7f-2dc4c38549ea" />
+
+See lift status, current conditions, snowfall in last 24 hours, and time to drive to ski resorts!
 
 Prerequisites:
  - `uv venv && source .venv/bin/activate`
